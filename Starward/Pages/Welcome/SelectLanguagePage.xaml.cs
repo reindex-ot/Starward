@@ -44,25 +44,36 @@ public sealed partial class SelectLanguagePage : Page
     }
 
 
-
+    [ObservableProperty]
+    private bool settingGridLoad;
 
 
     private async void Page_Loaded(object sender, RoutedEventArgs e)
     {
-        await Task.Delay(16);
+        await Task.Delay(480);
+        SettingGridLoad = true;
         InitializeLanguageComboBox();
+        _welcomeService.ApiCDNIndex = AppConfig.ApiCDNIndex;
         switch (AppConfig.ApiCDNIndex)
         {
             case 1: RadioButton_GH.IsChecked = true; break;
             case 2: RadioButton_JD.IsChecked = true; break;
             default: RadioButton_CF.IsChecked = true; break;
         }
+        _welcomeService.WindowSizeMode = AppConfig.WindowSizeMode;
         switch (AppConfig.WindowSizeMode)
         {
             case 1: RadioButton_WindowSize_Small.IsChecked = true; break;
             default: RadioButton_WindowSize_Normal.IsChecked = true; break;
         }
         TestCDNCommand.Execute(null);
+    }
+
+
+
+    private void Grid_OverMask_Loaded(object sender, RoutedEventArgs e)
+    {
+        Grid_OverMask.Visibility = Visibility.Collapsed;
     }
 
 

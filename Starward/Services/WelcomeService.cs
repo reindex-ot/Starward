@@ -17,10 +17,10 @@ internal class WelcomeService
     public event EventHandler<(Type Page, object Parameter, NavigationTransitionInfo InfoOverride)> OnNavigateTo;
 
 
-    public WelcomeService(ILogger<WelcomeService> logger/*, DatabaseService databaseService*/)
+    public WelcomeService(ILogger<WelcomeService> logger, DatabaseService databaseService)
     {
         _logger = logger;
-        //_databaseService = databaseService;
+        _databaseService = databaseService;
     }
 
 
@@ -54,6 +54,7 @@ internal class WelcomeService
 
     public void ApplySetting()
     {
+        _databaseService.SetDatabase(UserDataFolder);
         AppConfig.UserDataFolder = UserDataFolder;
         AppConfig.Language = TextLanguage;
         AppConfig.WindowSizeMode = WindowSizeMode;

@@ -1364,6 +1364,12 @@ internal partial class DownloadGameService
                 File.SetAttributes(file, FileAttributes.Normal);
                 File.Delete(file);
             }
+            foreach (var file in Directory.GetFiles(installPath, "*.hidff", SearchOption.AllDirectories))
+            {
+                _logger.LogInformation("Delete file: {file}", file);
+                File.SetAttributes(file, FileAttributes.Normal);
+                File.Delete(file);
+            }
         });
     }
 
@@ -1502,6 +1508,7 @@ internal partial class DownloadGameService
                 {
                     _streamIndex++;
                     _currentStream = _fileStreams[_streamIndex];
+                    _currentStream.Position = 0;
                     length = _currentStream.Read(buffer, offset, count);
                 }
             }
