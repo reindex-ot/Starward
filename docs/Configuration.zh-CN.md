@@ -1,5 +1,3 @@
-[English](./Configuration.md) | 简体中文 | [Tiếng Việt](./Configuration.vi-VN.md) | [日本語](./Configuration.ja-JP.md)
-
 # 应用配置
 
 从 0.8.0 版本开始，Starward 不再使用注册表存储配置信息，而是改用配置文件和数据库，使得整体应用在不同设备间的迁移更加方便。但是当文件结构不满足以下条件时，仍会使用注册表。
@@ -23,6 +21,10 @@
 ```ini
 # 是否启用控制台输出日志，True/False
 EnableConsole=False
+# 应用窗口大小，0 - 标准，1 - 较小
+WindowSizeMode=1
+# 应用界面语言，如 `zh-CN` `en-US`，为空时代表跟随系统设置
+Language=
 # 用户数据文件夹的位置
 UserDataFolder=.
 ```
@@ -76,8 +78,6 @@ Starward 使用 `enum GameBiz` 定义了不同的游戏区域，其中游戏全�
 
 | Key                             | Type    | Default Value | Comment                                                                      |
 | ------------------------------- | ------- | ------------- | ---------------------------------------------------------------------------- |
-| Language                        | string? | -             | 应用界面语言，如 `zh-CN` `en-US`，为空时代表跟随系统设置                     |
-| WindowSizeMode                  | int     | -             | 应用窗口大小，0 - 标准，1 - 较小                                             |
 | ApiCDNIndex                     | int     | -             | Api CDN 选项，0 - CloudFlare，1 - GitHub，2 - jsDelivr                       |
 | EnablePreviewRelease            | bool    | -             | 是否加入预览版更新渠道                                                       |
 | IgnoreVersion                   | string? | -             | 忽略更新提醒的版本，新版本大于此值才会继续提醒                               |
@@ -93,6 +93,8 @@ Starward 使用 `enum GameBiz` 定义了不同的游戏区域，其中游戏全�
 | UseOneBg                        | bool    | -             | 所有游戏区域使用同一个背景，一般在使用视频背景时启用                         |
 | AcceptHoyolabToolboxAgreement   | bool    | -             | 接受米游社工具箱页面的免责声明                                               |
 | HoyolabToolboxPaneOpen          | bool    | true          | 米游社工具箱页面的导航侧栏是否打开                                             |
+| EnableSystemTrayIcon            | bool    | true          | 启用后开启应用单例模式，点击关闭窗口按键时应用将最小化到系统托盘                 |
+| ExitWhenClosing                 | bool    | true          | 点击关闭窗口按键时直接退出进程                                            |
 
 ## 动态设置项
 
